@@ -1,0 +1,20 @@
+{
+  "name": "semanaomnistack",
+  "version": "1.0.0",
+  "description": "A project from omnistack week",
+  "main": "index.js",
+  "repository": "https://github.com/joaopmendes/semanaomnistack.git",
+  "author": "joaopmendes",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  },
+  "scripts": {
+    "start": "nodemon server/index.js"
+  }
+}
