@@ -1,13 +1,8 @@
 const { Router } = require(`express`)
-const helpers = require(`./helpers`)
 const routes = Router()
-
-routes.post("/devs", async function(req, res) {
-  console.log(req.body)
-  //   const { github_username } = req.body
-
-  //   //   console.log(helpers.fetchGithubUserData(github_username))
-  //   return res.json({ github_username })
-})
-
+const DevController = require("./Controllers/DevController")
+routes.post("/devs", DevController.store)
+routes.get("/devs/search", DevController.findNearbyDevs)
+routes.get("/devs", DevController.index)
+routes.delete("/devs/:github_username", DevController.destroy)
 module.exports = routes
