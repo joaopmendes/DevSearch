@@ -91,11 +91,20 @@ class DevController {
    */
   static async destroy(req, res) {
     const { github_username } = req.params;
-    await Dev.remove({ github_username }, (err, prod) => {
+    await Dev.remove({ github_username }, err => {
       if(err) return res.json({code: 500, errorMessage: `Could not remove the user ${github_username}`})
-      return res.json({ code: 200, data: prod });
+      return res.json({ code: 200 });
     })
-  }
+    }
+    static async update(req, res) {
+        const { github_username } = req.params
+        const {...rest } = req.body
+        await Dev.findOneAndUpdate({ github_username }, { ...rest } , (err, dev, res) => {
+            if (err) return res.json({ code: 500, errorMessage: `Could not find the user ${github_username}` })
+            return res.json({ code: 200, data: dev });
+ 
+        })
+    }
 }
 
 module.exports = DevController;
