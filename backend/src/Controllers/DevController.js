@@ -42,15 +42,14 @@ class DevController {
   static async store(req, res) {
     const { github_username, techs, latitude, longitude } = req.body;
     // Used to not duplicate devs
-    let duplicatedDev = null;
-    duplicatedDev = await Dev.findOne({ github_username });
+    let duplicatedDev = await Dev.findOne({ github_username });
     if (!duplicatedDev) {
         try {
             var { name, login, avatar_url, bio } = await helpers.fetchGithubUserData(
                 github_username
               );
-        } catch () {
-            return res.json({code: 404, errorMessage: "Error tryng to get your github profile"})
+        } catch (err) {
+            return await res.json({code: 404, errorMessage: "Error tryng to get your github profile"})
         }
      
 
@@ -92,9 +91,10 @@ class DevController {
    */
   static async destroy(req, res) {
     const { github_username } = req.params;
-    console.log(github_username);
-    console.log(await Dev.remove({ github_username }));
-    return res.json({ data: "Just trying" });
+    await Dev.remove({ github_username }, (err, prod) => {
+      if(err) return res.json({code: 500, errorMessage: `Could not remove the user ${github_username}`})
+      return res.json({ code: 200, data: prod });
+    })
   }
 }
 

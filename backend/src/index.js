@@ -5,8 +5,11 @@ const mongoose = require("mongoose")
 require("dotenv").config()
 
 const app = express()
+
+const port = process.env.PORT || 3000
+
 try {
-  mongoose.connect(encodeURI(`mongodb+srv://joaopmendes:teste123@semanaomnistack-no4x6.mongodb.net/omnistack?retryWrites=true&w=majority`), {
+  mongoose.connect(encodeURI(process.env.MONGO_STRING), {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
@@ -18,4 +21,4 @@ app.use(bodyParser.json())
 
 app.use(routes)
 
-app.listen(3000)
+app.listen(port)
