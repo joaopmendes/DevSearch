@@ -1,74 +1,57 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-
+import DevList from "./DevsList";
+import RegisterForm from "./RegisterForm";
 function App() {
-  const [githubUsername, setGithubUsername] = useState("");
-  const [techs, setTechs] = useState("");
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
   return (
     <AppContainer>
       <Aside>
-        <strong>Registra-te</strong>
-        <form>
-          <InputBlock>
-            <label htmlFor="github_username">Utilizador Github</label>
-            <input
-              name="github_username"
-              id="github_username"
-              required
-              value={githubUsername}
-              onChange={e => setGithubUsername(e.target.value)}
-            />
-          </InputBlock>
-          <InputBlock>
-            <label htmlFor="techs">Tecnologias utilizadas (react, node)</label>
-            <input name="techs" id="techs" value={techs} required onChange={e => setTechs(e.target.value)} />
-          </InputBlock>
-          <InputGroup>
-            <InputBlock>
-              <label htmlFor="latitude">Latitude</label>
-              <input
-                name="latitude"
-                id="latitude"
-                value={latitude}
-                required
-                onChange={e => setLatitude(e.target.value)}
-              />
-            </InputBlock>
-            <InputBlock>
-              <label htmlFor="latitude">Longitude</label>
-              <input
-                name="longitude"
-                id="longitude"
-                value={longitude}
-                required
-                onChange={e => setLongitude(e.target.value)}
-              />
-            </InputBlock>
-          </InputGroup>
-        </form>
+        <RegisterForm />
       </Aside>
-      <main></main>
+      <Main>
+        <DevList />
+      </Main>
     </AppContainer>
   );
 }
 const AppContainer = styled.section`
-  max-width: 1200px;
+  width: 90%;
   margin: 0 auto;
-  padding: 60px 30px;
+  padding-top: 60px;
 
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+
+  @media (max-width: 1366px) {
+    flex-direction: column;
+  }
 `;
+
 const Aside = styled.aside`
-  width: 320px;
+  width: 30%;
   background: #fff;
   box-shadow: 0 0 14px 0 rgba(0, 0, 0, 0.02);
   border-radius: 2px;
   padding: 30px 20px;
+  margin-right: 20px;
+
+  @media (max-width: 1366px) {
+    width: 100% !important;
+  }
+
+  h4 {
+    font-size: 20px;
+    text-align: center;
+    color: #333;
+  }
 `;
-const InputBlock = styled.div``;
-const InputGroup = styled.div``;
+const Main = styled.section`
+  width: 60%;
+  @media (max-width: 1366px) {
+    width: 100% !important;
+    padding-top: 20px;
+  }
+`;
+
 export default App;
