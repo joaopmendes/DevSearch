@@ -1,19 +1,34 @@
-import React, {useEffect} from "react";
+import React, { useEffect, useMemo, useState} from "react";
 import styled from "styled-components";
 import DevList from "./Dev/dev-list.component";
 import RegisterFormComponent from "./RegisterForm/register-form.component";
-import fetchDevs from "./../services/load-devs.service"
-function AppComponent() {
+import fetchDevs from "../services/load-devs.service";
+function AppComponent(callback, deps) {
+    const [devs, setDevs] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
-        console.log(fetchDevs());
-    },[]);
+        const getDevs = async () => {
+            setIsLoading(true)
+            const result = await fetchDevs();
+            setDevs(result.data)
+            setIsLoading(false)
+        };
+        getDevs()
+    }, []);
+
+    const addDev = dev => {
+        const newDevs = [...devs];
+        newDevs.push(dev);
+        setDevs(newDevs)
+    };
   return (
     <AppContainer>
       <Aside>
-        <RegisterFormComponent />
+        <RegisterFormComponent addDev={addDev}/>
       </Aside>
       <Main>
-        <DevList />
+        <DevList devs={devs} isLoading={isLoading} />
       </Main>
     </AppContainer>
   );

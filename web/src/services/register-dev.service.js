@@ -4,10 +4,10 @@ import {SERVICE_STATUS} from "./helpers";
 
 export default async ({githubUsername, techs, latitude, longitude}) => {
     return axios.post("/devs", {github_username: githubUsername, latitude, longitude, techs})
-        .then(suc => {
+        .then(res => {
            return {
                type: SERVICE_STATUS.OK,
-               data: suc.data
+               data: res.data
            }
         })
         .catch(err => {

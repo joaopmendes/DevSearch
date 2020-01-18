@@ -6,7 +6,7 @@ import { PushSpinner } from "react-spinners-kit";
 import {Flex} from "../../global.style";
 
 
-const RegisterFormComponent = () => {
+const RegisterFormComponent = ({addDev}) => {
     const [githubUsername, setGithubUsername] = useState("");
     const [techs, setTechs] = useState("");
     const [latitude, setLatitude] = useState("");
@@ -38,10 +38,10 @@ const RegisterFormComponent = () => {
             setIsLoading(true);
            const res = await registerUser({githubUsername, longitude, latitude, techs});
             setIsLoading(false);
-
             if (res.type === SERVICE_STATUS.OK) {
                setGithubUsername("");
-               setTechs("")
+               setTechs("");
+                addDev(res.data.dev)
            } else {
                setServerErrors(["Something went wrong"])
            }
