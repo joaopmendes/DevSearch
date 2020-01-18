@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from "react";
-import axios from "axios";
-import {Button, ErrorMessage, InputBlock, InputGroup} from "./register-form.style";
+import {Button, ErrorMessage, InputBlock, InputGroup, Strong} from "./register-form.style";
+import registerUser  from "../../services/register-dev.service";
+import {SERVICE_STATUS} from "../../services/helpers";
+import { PushSpinner } from "react-spinners-kit";
+import {Flex} from "../../global.style";
 
 
 const RegisterFormComponent = () => {
@@ -14,6 +17,7 @@ const RegisterFormComponent = () => {
         latitude: {isValid: false, touched: false, errorMessage: ""},
         longitude: {isValid: false, touched: false, errorMessage: ""}
     });
+    const [isLoading, setIsLoading] = useState(false);
     const [serverErrors, setServerErrors] = useState([]);
     const isFormValid = () => {
         let formValid = true;
@@ -28,19 +32,19 @@ const RegisterFormComponent = () => {
         }
         return formValid
     };
-    const createUser = (e) => {
+    const createUser = async (e) => {
         e.preventDefault();
         if (isFormValid()) {
-            axios.post("/devs", {github_username: githubUsername, latitude, longitude, techs})
-                .then(suc => {
-                    setServerErrors([]);
-                    console.log(suc);
+            setIsLoading(true);
+           const res = await registerUser({githubUsername, longitude, latitude, techs});
+            setIsLoading(false);
 
-                })
-                .catch(err => {
-                    console.log(err);
-                    setServerErrors(["Ooops. Could not register you. Please try again later."])
-                })
+            if (res.type === SERVICE_STATUS.OK) {
+               setGithubUsername("");
+               setTechs("")
+           } else {
+               setServerErrors(["Something went wrong"])
+           }
         }
 
     };
@@ -114,7 +118,7 @@ const RegisterFormComponent = () => {
     return (
         <>
             <h4>
-                <strong>Join us</strong>
+                <Strong>Join us</Strong>
             </h4>
             <form>
                 <InputBlock isValid={errors.githubUsername.isValid} show={errors.githubUsername.touched}>
@@ -144,6 +148,7 @@ const RegisterFormComponent = () => {
                     <InputBlock isValid={errors.latitude.isValid} show={errors.latitude.touched}>
                         <label htmlFor="latitude">Latitude</label>
                         <input
+                            type={"number"}
                             name="latitude"
                             id="latitude"
                             value={latitude}
@@ -157,6 +162,7 @@ const RegisterFormComponent = () => {
                     <InputBlock isValid={errors.longitude.isValid} show={errors.longitude.touched}>
                         <label htmlFor="longitude">Longitude</label>
                         <input
+                            type={"number"}
                             name="longitude"
                             id="longitude"
                             value={longitude}
@@ -173,7 +179,13 @@ const RegisterFormComponent = () => {
                         <ErrorMessage>{err}</ErrorMessage>
                     )
                 )}
+                {isLoading ?  <Flex justifyContent={"center"} alignItems={"center"}><PushSpinner
+                    size={30}
+                    color="#686769"
+                    loading={true}
+                /></Flex>:
                 <Button onClick={createUser} disabled={!isFormValid()}>Registrar</Button>
+                }
             </form>
         </>
     );

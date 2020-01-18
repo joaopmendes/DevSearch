@@ -1,8 +1,12 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styled from "styled-components";
 import DevList from "./Dev/dev-list.component";
 import RegisterFormComponent from "./RegisterForm/register-form.component";
+import fetchDevs from "./../services/load-devs.service"
 function AppComponent() {
+    useEffect(() => {
+        console.log(fetchDevs());
+    },[]);
   return (
     <AppContainer>
       <Aside>

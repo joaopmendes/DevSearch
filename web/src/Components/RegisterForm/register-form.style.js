@@ -1,6 +1,10 @@
 import styled, {keyframes} from "styled-components";
-import {fadeIn} from "react-animations";
+import {fadeIn, jello} from "react-animations";
+export const Strong = styled.h4`
+  font-weight: bold;
+      animation: 1s ${keyframes`${fadeIn}`};
 
+`
 export const InputGroup = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -16,6 +20,7 @@ export const ErrorMessage = styled.p`
 `;
 export const InputBlock = styled.div`
   margin-top: 20px;
+  animation: 1s ${keyframes`${jello}`};
   label {
     width: 100%;
     color: #acacac;
@@ -66,6 +71,8 @@ export const Button = styled.button`
   color: #fff;
   cursor: pointer;
   transition: background 0.5s;
+  animation: 1s ${keyframes`${fadeIn}`};
+
   &:hover {
     background: #6931ca;
   }
