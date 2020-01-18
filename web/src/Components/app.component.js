@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import DevList from "./DevsList";
-import RegisterForm from "./RegisterForm";
-function App() {
+import DevList from "./Dev/dev-list.component";
+import RegisterFormComponent from "./RegisterForm/register-form.component";
+function AppComponent() {
   return (
     <AppContainer>
       <Aside>
-        <RegisterForm />
+        <RegisterFormComponent />
       </Aside>
       <Main>
         <DevList />
@@ -54,4 +54,4 @@ const Main = styled.section`
   }
 `;
 
-export default App;
+export default AppComponent;
