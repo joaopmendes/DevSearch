@@ -12,14 +12,13 @@ class DevController {
    * List nearby devs by tech
    */
   static async findNearbyDevs(req, res) {
-    const { latitude, longitude, techs } = req.query;
-    console.log(latitude, longitude, techs);
+    const { latitude, longitude , techs } = req.query;
     const techArray = techs.split(",").map(curr => curr.trim());
     await Dev.find(
       {
-        techs: {
+        techs: techArray.length > 0 ? {
           $in: techArray
-        },
+        } : {},
         location: {
           $near: {
             $geometry: {
