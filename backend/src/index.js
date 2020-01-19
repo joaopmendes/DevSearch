@@ -1,14 +1,19 @@
-const express = require("express");
-var bodyParser = require("body-parser");
-const routes = require(`./routes`);
-const mongoose = require("mongoose");
 require("dotenv").config();
+const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const cors = require("cors");
+const http = require('http');
+
+
+const {setupWebSocket} = require("./websocket")
+const routes = require(`./routes`);
+
 
 const app = express();
-
+const server = http.Server(app);
 const port = process.env.PORT || 3000;
-
+setupWebSocket(server)
 try {
   mongoose.connect(encodeURI(process.env.MONGO_STRING), {
     useNewUrlParser: true,
