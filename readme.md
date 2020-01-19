@@ -11,9 +11,9 @@ A aplicação consiste em 3 partes:
     - Frontend mobile: o frontend mobile foi desenvolvido com React-Native
     
     
-##**Instalação**
+##Instalação
 
-###_Backend_
+###Backend
 
 Primeiro passo: 
 `cd backend && npm install` ou `cd backend && yarn install`
