@@ -1,7 +1,7 @@
 {
-  "name": "semanaomnistack",
+  "name": "DevSearch",
   "version": "1.0.0",
-  "description": "A project from omnistack week",
+  "description": "Encontre os desenvolvedores perto de si!",
   "main": "index.js",
   "repository": "https://github.com/joaopmendes/semanaomnistack.git",
   "author": "joaopmendes",
