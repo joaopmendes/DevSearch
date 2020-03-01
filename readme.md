@@ -1,58 +1,54 @@
-# **_Dev Search_**
+This project was done during the omnistack week.
 
-Este projeto foi feito no decorrer da semana omnistack.
+The application consists of 3 parts:
 
-A aplicação consiste em 3 partes:
+    - Backend: the application backend was developed in Nodejs in conjunction with Mongodb
+    
+    - Web frontend: the frontend was developed with React
+    
+    - Mobile frontend: the mobile frontend was developed with React-Native
+    
+    
+##Installation
 
-    - Backend: o backend da aplicação foi desenvolvida em Nodejs em conjunto com Mongodb 
-    
-    - Frontend web: o frontend foi desenvolvido com React
-    
-    - Frontend mobile: o frontend mobile foi desenvolvido com React-Native
-    
-    
-##Instalação
+### Backend
 
-###Backend
+First step:
+`cd backend && npm install` or` cd backend && yarn install`
 
-Primeiro passo: 
-`cd backend && npm install` ou `cd backend && yarn install`
+Second step:
+Create an .env file with the following configuration:
+``
+MONGO_STRING = <Connection string with mongodb>
 
-Segundo passo:
-Criar um ficheiro .env com a seguinte configuração:
-```
-MONGO_STRING=<String de conecção com mongodb>
+PORT = <Port>
+``
 
-PORT=<Porta>
-```
-
-Terceiro passo: ```yarn start``` ou ```npm start```
+Third step: `` yarn start`` or `` npm start``
 
 ### _Frontend Web_
 
-Primeiro passo: 
-`cd web && npm install` ou `cd web && yarn install`
+First step:
+`cd web && npm install` or` cd web && yarn install`
 
-Segundo passo:
-Alterar o package.json key proxy para a porta utilizada no backend
+Second step:
+Change the package.json key proxy to the port used in the backend
 
-Terceiro passo: ```yarn start``` ou ```npm start```
+Third step: `` yarn start`` or `` npm start``
 
 ### _Frontend Mobile_
 
-Primeiro passo: 
-`cd mobile && npm install` ou `cd mobile && yarn install`
+First step:
+`cd mobile && npm install` or` cd mobile && yarn install`
 
-Segundo passo:
-Alterar o package.json key proxy para a porta utilizada no backend
+Second step:
+Change the package.json key proxy to the port used in the backend
 
-Terceiro passo: ```yarn start``` ou ```npm start```
-
-
+Third step: `` yarn start`` or `` npm start``
 
 
-## Creditos
 
-Gostava de agradecer à Rocketseat por esta experiencia fantástica.
 
-`https://rocketseat.com.br/`
+## Credits
+
+I would like to thank Rocketseat for this fantastic experience.
